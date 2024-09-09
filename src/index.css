@@ -2,8 +2,6 @@
   font-family: Arial, sans-serif;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #000000;
-  
 
 }
 
@@ -21,6 +19,7 @@ h1 {
 
 ul{
   line-height: 1.1;
+  list-style: none;
 }
 
 li {

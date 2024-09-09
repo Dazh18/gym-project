@@ -1,4 +1,4 @@
-import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
+import { extendTheme, type ThemeConfig, useColorModeValue } from '@chakra-ui/react'
 
 // Configuración del modo de color
 const config: ThemeConfig = {
@@ -10,7 +10,7 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   styles: {
-    global: {
+    global:(props)=>( {
       'html, body': {
         fontFamily: 'Arial, sans-serif',
         color: 'rgba(255, 255, 255, 0.87)',
@@ -18,7 +18,8 @@ const theme = extendTheme({
         margin: 3,
         lineHeight: '1.1',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'center',  
+        backgroundColor: props.colorMode === 'dark' ? '#000000' : '#ffffff', // Cambiar el color de fondo según el modo
       },
       h1: {
         fontSize: '3.2em',
@@ -34,7 +35,8 @@ const theme = extendTheme({
         gridTemplateColumns: 'auto auto',
         lineHeight: '1.1',
         padding: '3px',
-        columnGap: '20px'
+        columnGap: '20px',
+        
       },
       li: {
         margin: '5px',
@@ -44,11 +46,12 @@ const theme = extendTheme({
         backgroundColor: '',
         cursor: 'pointer',
         transition: 'border-color 0.25s',
+        listStyleType: 'none',
         _hover: {
           borderColor: '#48BB78',
         },
       },
-    },
+    }),
   },
 })
 
