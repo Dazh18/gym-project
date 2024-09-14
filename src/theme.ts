@@ -1,4 +1,4 @@
-import { extendTheme, type ThemeConfig, useColorModeValue } from '@chakra-ui/react'
+import { extendTheme, type ThemeConfig, } from '@chakra-ui/react'
 
 // Configuración del modo de color
 const config: ThemeConfig = {
@@ -31,8 +31,6 @@ const theme = extendTheme({
       },
       ul: {
         textAlign: 'center', 
-        display: 'grid',
-        gridTemplateColumns: 'auto auto',
         lineHeight: '1.1',
         padding: '3px',
         columnGap: '20px',
@@ -43,6 +41,7 @@ const theme = extendTheme({
         borderRadius: '8px',
         border: '2px solid blue',
         padding: '3px',
+        
         backgroundColor: '',
         cursor: 'pointer',
         transition: 'border-color 0.25s',
@@ -51,6 +50,10 @@ const theme = extendTheme({
           borderColor: '#48BB78',
         },
       },
+      '.habit':{
+        display: 'grid',
+        gridTemplateColumns: 'auto auto',
+      }
     }),
   },
 })

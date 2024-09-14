@@ -53,6 +53,7 @@ function App() {
       return updatedSelections;
     });
 
+    // Actualiza el hábito seleccionado.
     setSelectedItems(prevSelected => ({
       ...prevSelected,
       [category]: prevSelected[category] === itemId ? null : itemId
@@ -60,13 +61,19 @@ function App() {
   };
 
   const groupByDate = (selections) => {
-    return selections.reduce((acc, selection) => {
-      if (!acc[selection.date]) {
-        acc[selection.date] = [];
+    const groupedSelections = {}; //  objeto vacío para agrupar
+
+    selections.forEach(selection => {
+      const { date, habit } = selection;
+
+      if (!groupedSelections[date]) {
+        groupedSelections[date] = []; // Inicia el array si no existe
       }
-      acc[selection.date].push(selection.habit);
-      return acc;
-    }, {});
+
+      groupedSelections[date].push(habit); // Agregar hábito al array de esa fecha
+    });
+
+    return groupedSelections;
   };
 
   const [selectedItems, setSelectedItems] = useState({
@@ -89,6 +96,8 @@ function App() {
   const bg = useColorModeValue('', '');
   const color = useColorModeValue('black', 'White');
   const hover = useColorModeValue('blue', '#48BB78');
+
+   // Estado para manejar si se muestran todos los hábitos o solo algunos.
   const [showAll, setShowAll] = useState(false);
   const habits = [
     'Walk 15 min', 'Read 15 min', 'Excercise 15 min',
@@ -111,7 +120,7 @@ function App() {
         </Box>
         <Box>
           <h2>Habit</h2>
-          <ul>
+          <ul className='habit'>
             {(showAll ? habits : habits.slice(0, 2)).map((habit) => (
               <li
                 key={habit}
@@ -143,7 +152,7 @@ function App() {
               {Object.entries(groupByDate(savedSelections)).map(([date, habits], index) => (
                 <Box key={index} mb={4}>
                   <Box>{date}</Box>
-                  <ul>
+                  <ul className='habit'>
                     {habits.map((habit, habitIndex) => (
                       <li key={habitIndex} style={{ backgroundColor: hover, margin: '5px', padding: '10px', borderRadius: '8px' }}>
                         {habit}
